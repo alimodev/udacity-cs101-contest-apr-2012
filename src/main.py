@@ -84,7 +84,7 @@ UNLESS OTHERWISE MUTUALLY AGREED TO BY THE PARTIES IN WRITING AND TO THE FULLEST
 # Used for authenticating you as an API user in Google safe browsing API
 # In order to obtain an API key, you must have a Google account.
 # Sign up for the API at https://developers.google.com/safe-browsing/key_signup
-gsb_api_key = "ABQIAAAAjGCVGE-DSWc1tJ5XqWbxHBSs4c4FoKHPWOD30V293UcyQ6PFYA"
+gsb_api_key = "your-api-key-here"
 
 # Crawler name:
 crawler_name = "MCrawlerPack"
@@ -111,8 +111,8 @@ def get_page(url):
 		return response.read()
 	except HTTPError, e:
 		return e.code
-		
-		
+
+
 """
 - Check server response code:
   Table mapping response codes to messages
@@ -194,7 +194,7 @@ def check_response(code):
 		return code, responses[code]
 	else:
 		return False
-	
+
 
 """
 - Download file:
@@ -214,14 +214,14 @@ def download(url, path="untitled"):
 	except IOError as (errno, strerror):
 		print "I/O error({0}): {1}".format(errno, strerror)
 
-		
+
 """
 - Python HTTP POST:
   Passes data to a given url as an HTTP POST request and fetches the result.
   The data argument can be a string or a dictionary of the post data.
   example:
   >>> post_data("http://www.mysite.com/login.jsp", {"userid": "joe", "password": "guessme"})
-"""		
+"""
 def post_data(url, data=""):
 	try:
 		import urllib2, urllib
@@ -238,7 +238,7 @@ def post_data(url, data=""):
 	except HTTPError, e:
 		return e.code
 
-		
+
 """
 - JSON Decode:
   Decodes an encoded JSON string into a dictionary
@@ -247,7 +247,7 @@ def json_decode(encoded):
 	import json
 	return json.loads(encoded)
 
-	
+
 """
 - JSON Encode:
   Encodes a dictionary into an encoded JSON string
@@ -256,7 +256,7 @@ def json_encode(encoded):
 	import json
 	return json.dumps(encoded)
 
-	
+
 """
 - GZ Read:
   Loads a gzip compressed file from the given path (Absolute path + filename)
@@ -270,8 +270,8 @@ def gz_read(path):
 		return content
 	except IOError as (errno, strerror):
 		print "I/O error({0}): {1}".format(errno, strerror)
-		
-		
+
+
 """
 - GZ Write:
   Writes content into a gzip compressed file in the given path (Absolute path + filename)
@@ -285,7 +285,7 @@ def gz_write(content="", path="untitled"):
 	except IOError as (errno, strerror):
 		print "I/O error({0}): {1}".format(errno, strerror)
 
-	
+
 """
 - Base url:
   returns a url up to the 3rd slash, without the trailing slash.
@@ -305,8 +305,8 @@ def base_url(url):
 			return url[0:pos-1]
 	else:
 		return ""
-	
-		
+
+
 """
 - Raw url:
   return only the domain name.
@@ -337,7 +337,7 @@ def raw_url(url):
   >>> print scan_this("http://www.eicar.org/download/eicar_com.zip")
   # True
   Note that it takes a few seconds to scan the given url
-"""		
+"""
 def scan_this(url):
 	rep = 'http://scanthis.net/api'
 	data = {}
@@ -359,12 +359,12 @@ def scan_this(url):
 			if not chk["scanned"]:
 				chk = check_result(res["id"])
 			else:
-				break	
+				break
 		return chk["infected"]
 	else:
 		scan_this(url)
 
-		
+
 """
 - Phishtank Antiphishing:
   Check sites againts Phishtank antiphishing database. (http://www.phishtank.com/)
@@ -392,11 +392,11 @@ def phishtank(url):
 		if raw_url(url) == raw_url(e["url"]):
 			return True
 	return False
-	
+
 
 """
 - Google safe browsing Api:
-  Allows you to check URLs against Google's constantly updated lists of suspected phishing and malware pages. 
+  Allows you to check URLs against Google's constantly updated lists of suspected phishing and malware pages.
   Note: In order to use this service, you need to request an API key. More datails in the configs section on top...
   Note: Some latency implied by a network roundtrip !!!
   If the passed url is a malware or phishing site, it returns True, else, it returns False
@@ -425,7 +425,7 @@ def safe_check(url):
 	else:
 		return "In order to use this service, you need to request an API key at https://developers.google.com/safe-browsing/key_signup"
 
-		
+
 """
 - Spell Suggestion:
   Checks words and sentences spelling and outputs the correct form, based on the Google dictionary.
@@ -457,7 +457,7 @@ def spell_check(word):
 					text = corc.firstChild.data
 					changes.append([text, offset, length])
 				for e in reversed(changes):
-					word = word.replace(word[int(e[1]):int(e[1])+int(e[2])], e[0].split("\t")[0])	
+					word = word.replace(word[int(e[1]):int(e[1])+int(e[2])], e[0].split("\t")[0])
 	else:
 		check_response(res)
 	return word
@@ -546,7 +546,7 @@ def robot_parser(url):
 		crawldelay = re.findall(r'^Crawl-delay.*?:\s?(.*?)\s?$', e[0], re.M|re.I)
 		rules[useragent[0]] = {"allow":allow, "disallow":disallow, "sitemap":sitemap, "crawl-delay":crawldelay}
 	return rules
-	
+
 
 """
 - Robots <META> tag:
@@ -567,7 +567,7 @@ def meta_robot(url):
 			return content[0]
 		return False
 
-	
+
 """
 - Can Crawl:
   This procedure takes your crawler user-agent and a url as an input and tells you whether you can crawl the page or not, based on the information of the robots.txt file and meta robots tag.
@@ -638,7 +638,7 @@ def sitemap_parser(url):
 			if loc != "":
 				res[loc] = {"changefreq":changefreq, "priority":priority, "lastmod":lastmod}
 		return res
-			
+
 
 """
 - Save Bucket:
@@ -661,13 +661,13 @@ def save_bucket(dict, path):
   example:
   >>> import sys,os
   >>> load_bucket(sys.path[0] + os.sep + "bucket01.gz")
-  # 
+  #
 """
 def load_bucket(path):
 	data = gz_read(path)
 	return eval(data)
 
-	
+
 """
 - Strip Tags:
   Strip HTML tags from string (or HTML source).
@@ -678,9 +678,9 @@ def load_bucket(path):
 def strip_tags(data):
 	import re
 	p = re.compile(r'<.*?>')
-	return p.sub('', data)	
-	
-	
+	return p.sub('', data)
+
+
 """
 - Remove Extra Spaces:
   Remove more than one consecutive white space.
@@ -692,8 +692,8 @@ def remove_extra_spaces(data):
 	import re
 	p = re.compile(r'\s+')
 	return p.sub(' ', data)
-	
-	
+
+
 """
 - String Truncate:
   Truncates a variable to a character length. You can specify the length with the limit argument.
@@ -724,7 +724,7 @@ def truncate(string, limit=0, delimiter="", extension=""):
 			else:
 				return string[:limit] + extension
 	return string
-			
+
 
 """
 - Url Truncate:
@@ -764,7 +764,7 @@ def generate_title(url):
 		if len(title) > 0:
 			res = title[0]
 	return res
-	
+
 
 """
 - Description generator:
@@ -790,7 +790,7 @@ def generate_description(url):
 			if body:
 				res = strip_tags(body[0])
 	return truncate(remove_extra_spaces(res), 180, " ", "...")
-		
+
 
 """
 - Alexa Rank:
@@ -811,8 +811,8 @@ def alexa_rank(url):
 				if reach[0].hasAttribute("RANK"):
 					return reach[0].getAttribute("RANK")
 	return "n/a"
-	
-	
+
+
 """
 - Better Get All Links:
   Return the dictionary of all the links that are in the passed string, with link text and rel attribute.
