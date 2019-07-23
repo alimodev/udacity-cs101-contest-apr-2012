@@ -1,0 +1,89 @@
+Submission
+
+
+Submission: Search Engine Feature Pack
+
+
+Kind of a late submission and maybe a late time for user votes, but I like what I did. Writing 30 procedures in over 800 lines of code and comment. That made me quite busy this week. Coding, searching, learning, failing, debugging, documenting, testing... Let's say I'm quite pythonised !!!
+
+
+I called it feature pack, because it's a pack of functions that adds lots of functionalities to your existing search engine and/or crawler.
+
+
+Here I introduce some of them briefly:
+
+
+Virus and Malware checking procedure: Checks urls against Virus and Malware, based on the open source ClamAV engine.
+
+Phishtank Antiphishing: Check sites against Phishtank antiphishing database.
+
+Google safe browsing Api: Allows you to check URLs against Google's constantly updated lists of suspected phishing and malware pages.
+
+Spell suggestion: checks words and sentences spelling and outputs the correct form, based on the Google dictionary.
+
+Related Searches: Shows related searches of a given keyword based on the Yahoo database.
+
+robots.txt finder: find the location of the robot.txt file based on the given url.
+
+robots.txt parser: BE POLITE !!! Parse the robots.txt file and returns a dictionary of all the allowed and disallowed urls for each useragent, along with sitemap and crawl delay.
+
+Robots <META> tag: Parse the HTML <META> tag of a given url that tells robots not to index the content of a page, and/or not scan it for links to follow.
+
+Can Crawl: This procedure takes your crawler user-agent and a url as an input and tells you whether you can crawl the page or not, based on the information of the robots.txt file and meta robots tag.
+
+Sitemap Parser: Parse an xml sitemap and return a dictionary of all the urls that can be crawled and the change frequency, priority and last modification date of each url.
+
+Save Bucket: Saves a bucket into given path and compresses it using gzip.
+
+Load Bucket: Loads a gzipped bucket from a given path and returns a dictionary.
+
+Url Truncate: Truncates a url to a character length. You can specify the length with the limit argument.
+
+Title generator: Takes a url as input, fetches the page, matches the <title>...</title> tag and returns it.
+
+Description generator: Takes a url as input and generate the pages description, based on the description meta tag or body content.
+
+Alexa Rank: Returns the Alexa ranking of a given url. for more information about Alexa rankings, visit alexa.com. You can use alexa rank for computing webpages ranks.
+
+Better Get All Links: Return the dictionary of all the links that are in the passed string, with link text and rel attribute.
+
+
+Also you can find other useful procedures in the code, like:
+
+
+get_page() for fetching urls, 
+
+check_response() for Checking server response code, 
+
+download() for downloading and storing files, 
+
+post_data() for passing HTTP Post requests to webpages and retriving them, 
+
+json_decode() and json_encode for decoding and encoding JSON, 
+
+gz_read() and gz_write() for working with gzipped compressed files, 
+
+base_url() and raw_url() for modifying urls, 
+
+strip_tags() for stripping HTML tags, 
+
+remove_extra_spaces() for removing more than one consecutive white space, 
+
+truncate() for truncating a string to a character length.
+
+
+This code is published under Creative Commons Public License on my blog: Search Engine Feature Pack
+
+Feel free to remix, tweak, and build upon this code, as long as you credit it's license and license your new creations under the identical terms.
+
+I'm waiting for your responses on my blog...
+
+Also you can find it on pastebin.
+
+
+Creator: Alireza Mortazavi
+Udacity signup email: mortazavi@paleez.com
+Forum ID: Mortazavi
+
+
+Don't forget to check my existing search engine Paleez: http://www.paleez.com/
